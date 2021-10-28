@@ -1,20 +1,41 @@
 const { getConnection } = require('../Database/db');
 const Controller = {};
 
-Controller.getAll = async ( req, res ) => {
+Controller.getAll = async (req,res) => {
     try {
-        // get connection
         const conn = await getConnection();
        
         const query = 'select * from Student';
         const rows = await conn.query(query);
     
-       res.status(200).json(rows);
+        res.status(200).json(rows);
         
-    } catch ( error ) {
-        console.log( error );
+    } catch (error) { 
+        // internal server error
+        res.status(500);
+        console.log(error);
     }
 }
+
+Controller.getById = async (req,res) => {
+    try {
+        const conn = await getConnection();
+
+        const id = req.params.id;
+        if (!id) res.status(404);
+
+        const query = 'select * from Student where id=' + id;
+        const response = await conn.query(query);
+        
+        res.status(200).json(response);
+
+    } catch (error) {
+        // internal server error
+        res.status(500);
+        console.log(error);
+    }
+}
+
 // Controller.postClient = async (req,res) => {
 //     const newClient = new Client({
 //         name: req.body.name,
@@ -37,11 +58,7 @@ Controller.getAll = async ( req, res ) => {
 //         }
 //     });
 // }
-// Controller.getClient = async (req,res) => {
-//     const id = req.params.id;
-//     const response = await Client.findOne({_id:id});
-//     res.json(response);
-// }
+
 // Controller.updateClient = async (req,res) => {
 //     const id = req.params.id;
 //     const client = {

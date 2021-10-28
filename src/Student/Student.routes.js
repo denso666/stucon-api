@@ -7,8 +7,8 @@ router.route('/')
     .get( Controller.getAll );
 //     .post( Controller.postClient );
 
-// router.route('/:id')
-//     .get( Controller.getClient )
+router.route('/:id')
+    .get( Controller.getById );
 //     .put( Controller.updateClient )
 //     .delete( Controller.deleteClient );
 
