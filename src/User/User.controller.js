@@ -5,13 +5,7 @@ Controller.getAll = async (req,res) => {
     try {
         const conn = await getConnection();
        
-        const query = `
-            select U.id, U.name, U.email, U.rol, S.code, S.area, S.semester
-            from User as U
-            left join Student as S
-            on S.user_id=U.id
-            where U.rol='STUDENT'`;
-
+        const query = `select id, name, email, rol from User where rol='ROOT'`;
         const rows = await conn.query(query);
     
         res.status(200).json(rows);
@@ -30,13 +24,8 @@ Controller.getById = async (req,res) => {
         const id = req.params.id;
         if (!id) res.status(404);
 
-        const query =`
-            select U.id, U.name, U.email, U.rol, S.code, S.area, S.semester
-            from User as U
-            left join Student as S
-            on S.user_id=U.id
-            where S.user_id=${id} and U.rol='STUDENT'`;
-
+        const query =`select id, name, email, rol from User
+        where id=${id} and rol='ROOT'`;
         const response = await conn.query(query);
         
         res.status(200).json(response);

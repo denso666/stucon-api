@@ -19,8 +19,10 @@ app.use( express.json() );
 
 
 //      ROUTES
+app.use('/api/user',require('./User/User.routes'));
 app.use('/api/student',require('./Student/Student.routes'));
-//app.use('/api/company',require('./Company/Company.routes'));
+app.use('/api/company',require('./Company/Company.routes'));
+app.use('/api/vacant',require('./Vacant/Vacant.routes'));
 
 
 //      LISTEN
