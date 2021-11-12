@@ -1,5 +1,3 @@
-create database studentConnect;
-
 create table User (
     id int primary key auto_increment,
     name varchar(128) not null,
