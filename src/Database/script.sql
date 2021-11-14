@@ -38,6 +38,6 @@ create table Postulation (
     vacant_id int not null,
     user_id int not null,
     status boolean default 1,
-    foreign key (vacant_id) references Vacante(id),
+    foreign key (vacant_id) references Vacant(id),
     foreign key (user_id) references User(id)
 );
